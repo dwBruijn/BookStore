@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<hr>
+<div class="row">
+    {% for book in object_list %}
+        <div class="col">
+            <div class="card" style="height: 31rem; width: 13rem; margin-bottom: 1rem;">
+                <img src="{{ book.image.url }}" class="card-img-top" alt="{{ book.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title|slice:":25"}} ...</h5>
+                    <p class="card-text">${{ book.price|floatformat:2 }}</p>
+                    {% if book.is_available is True %}
+                        <li class="text-primary">Available</li>
+                    {% else %}
+                        <li class="text-danger">Out of Stock</li>
+                    {% endif %} <br>
+                    <a href="{% url 'details' book.id %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

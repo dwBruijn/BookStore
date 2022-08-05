@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock title %}
+{% block content %}
+    <h3 class="text-secondary">Search Results</h3>
+    <hr>
+    {% for entry in object_list %}
+        <div>
+            <h5>
+                <a href="{% url 'details' entry.pk %}">{{ entry.title }}</a>
+            </h5>
+            <p>Author: {{ entry.author }}</p>
+        </div>
+        {% empty %}
+        <div>
+            <h5 class="text-danger">Nothing found!!</h5>
+            <p>Didn't find what you're looking for? Feel free to <a href="{% url 'request' %}">request a book</a>.</p>
+        </div>
+    {% endfor %}
+{% endblock content %}

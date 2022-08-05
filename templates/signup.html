@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock title%}
+{% block content %}
+<h2 class="col-md-5">Sign up</h2>
+
+<form method="POST" class="col-md-5">
+    {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control" name="username" placeholder="Username" maxlength="150" autofocus required />
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" placeholder="Email" required />
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" name="password1" placeholder="Password" required />
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" name="password2" placeholder="Password Confirmation" required />
+    </div>
+    <button type="submit" class="btn btn-primary" >Sign up</button>
+</form>
+{% endblock content %}
